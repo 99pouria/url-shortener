@@ -1,4 +1,4 @@
-package url_shortener
+package main
 
 import (
 	"fmt"
@@ -19,7 +19,7 @@ func main() {
 
 	for {
 		var choice int
-		fmt.Print("[1] create a short link\n[2] show all links\n[other] quit\n\n")
+		fmt.Print("[1] create a short link\n[2] show all links\n[other] quit\n")
 		fmt.Scanf("%d", &choice)
 
 		switch choice {
@@ -27,7 +27,7 @@ func main() {
 			var url string
 			fmt.Print("type url: ")
 			fmt.Scanf("%s", &url)
-			fmt.Print("short lnk is: ", mapURLtoShorterURL(url), "\n")
+			fmt.Print("short link is: ", mapURLtoShorterURL(url), "\n\n")
 		case 2:
 			for key, value := range urlSet {
 				fmt.Println("____________")
@@ -36,7 +36,7 @@ func main() {
 			}
 			fmt.Println()
 		default:
-			break
+			return
 		}
 
 	}
