@@ -2,12 +2,15 @@ package build
 
 import (
 	"fmt"
+	"github.com/labstack/echo"
 	"strconv"
 	"testing"
 )
 
+var e *echo.Echo
+
 func TestCreateShortAddress(t *testing.T) {
-	go RunServer()
+	go RunServer(e)
 
 	for i := 1; i < 100; i++ {
 		expect := CreateShortAddress()
@@ -26,11 +29,11 @@ func TestOpenUrl(t *testing.T) {
 }
 
 func TestMapURLtoShorterURL(t *testing.T) {
-	go RunServer()
+	go RunServer(e)
 	url1 := "https://google.com/"
 	url2 := "https://github.com/"
-	MapURLtoShorterURL(url1)
-	MapURLtoShorterURL(url2)
+	MapURLtoShorterURL(url1, e)
+	MapURLtoShorterURL(url2, e)
 
 	if UrlSet[url1] != "/34" || UrlSet[url2] != "/35" {
 		t.Error("result not expected, urlSet:\n", UrlSet)
