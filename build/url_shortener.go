@@ -2,8 +2,7 @@ package build
 
 import (
 	"fmt"
-	"log"
-	"net/http"
+	"github.com/labstack/echo"
 	"os/exec"
 	"strconv"
 	"strings"
@@ -12,31 +11,28 @@ import (
 var seed int64
 var UrlSet = make(map[string]string)
 
-func RunServer() {
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+func RunServer(e *echo.Echo) {
+	e.Logger.Fatal(e.Start(":8080"))
 }
 
 func CreateShortAddress() string {
 	seed++
 	s := strconv.FormatInt(seed, 32)
-	return fmt.Sprint("/", s)
+	return fmt.Sprint(s)
 }
 
-func MapURLtoShorterURL(longUrl string) string {
+func MapURLtoShorterURL(longUrl string, e *echo.Echo) string {
 	if !strings.Contains(longUrl, "http") {
 		longUrl = fmt.Sprint("https://", longUrl)
 	}
 
 	UrlSet[longUrl] = CreateShortAddress()
 
-	http.HandleFunc(UrlSet[longUrl], func(w http.ResponseWriter, r *http.Request) {
-		OpenUrl(longUrl)
+	e.GET("/:shortUrl", func(context echo.Context) error {
+		return OpenUrl(longUrl)
 	})
 
-	return fmt.Sprint("http://localhost:8080", UrlSet[longUrl])
+	return fmt.Sprint("http://localhost:8080/", UrlSet[longUrl])
 }
 
 func OpenUrl(url string) error {

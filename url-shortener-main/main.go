@@ -1,13 +1,16 @@
-package build
+package main
 
 import (
 	"fmt"
+	"github.com/labstack/echo"
 	"url-shortener/build"
 )
 
 func main() {
 
-	go build.RunServer()
+	e := echo.New()
+
+	go build.RunServer(e)
 
 	for {
 		var choice int
@@ -19,12 +22,12 @@ func main() {
 			var url string
 			fmt.Print("type url: ")
 			fmt.Scanf("%s", &url)
-			fmt.Print("short link is: ", build.MapURLtoShorterURL(url), "\n\n")
+			fmt.Print("short link is: ", build.MapURLtoShorterURL(url, e), "\n\n")
 		case 2:
 			for key, value := range build.UrlSet {
 				fmt.Println("____________")
 				fmt.Println("long link:", key)
-				fmt.Print("short link: http://localhost:8080", value, "\n")
+				fmt.Print("short link: http://localhost:8080/", value, "\n")
 			}
 			fmt.Println()
 		default:

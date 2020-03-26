@@ -1,17 +1,16 @@
-package build_test
+package build
 
 import (
 	"fmt"
 	"strconv"
 	"testing"
-	"url-shortener/build"
 )
 
 func TestCreateShortAddress(t *testing.T) {
-	go build.RunServer()
+	go RunServer()
 
 	for i := 1; i < 100; i++ {
-		expect := build.CreateShortAddress()
+		expect := CreateShortAddress()
 		got := fmt.Sprint("/", strconv.FormatInt(int64(i), 32))
 		if expect != got {
 			t.Error("expected ", expect, ", got ", got)
@@ -20,20 +19,20 @@ func TestCreateShortAddress(t *testing.T) {
 }
 
 func TestOpenUrl(t *testing.T) {
-	err := build.OpenUrl("http://google.com/")
+	err := OpenUrl("http://google.com/")
 	if err != nil {
 		t.Error(err)
 	}
 }
 
 func TestMapURLtoShorterURL(t *testing.T) {
-	go build.RunServer()
+	go RunServer()
 	url1 := "https://google.com/"
 	url2 := "https://github.com/"
-	build.MapURLtoShorterURL(url1)
-	build.MapURLtoShorterURL(url2)
+	MapURLtoShorterURL(url1)
+	MapURLtoShorterURL(url2)
 
-	if build.UrlSet[url1] != "/34" || build.UrlSet[url2] != "/35" {
-		t.Error("result not expected, urlSet:\n", build.UrlSet)
+	if UrlSet[url1] != "/34" || UrlSet[url2] != "/35" {
+		t.Error("result not expected, urlSet:\n", UrlSet)
 	}
 }
