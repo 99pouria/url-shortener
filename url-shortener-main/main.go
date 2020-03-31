@@ -11,7 +11,7 @@ func main() {
 	e := echo.New()
 	build.Initialize()
 	build.NewClient()
-	build.GetUrlSetFromDB()
+	build.GetUrlSetFromDB(e)
 	go build.RunServer(e)
 
 	for {

@@ -86,7 +86,7 @@ func setKey(key string, value string) {
 	}
 }
 
-func GetUrlSetFromDB() {
+func GetUrlSetFromDB(e *echo.Echo) {
 	s := getKey("urlShortener")
 	if s == "" {
 		return
@@ -94,6 +94,12 @@ func GetUrlSetFromDB() {
 	err := json.Unmarshal([]byte(s), &UrlSet)
 	if err != nil {
 		fmt.Println(err)
+	}
+
+	for key, value := range UrlSet {
+		e.GET(value, func(context echo.Context) error {
+			return OpenUrl(key)
+		})
 	}
 }
 
