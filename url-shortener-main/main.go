@@ -9,7 +9,9 @@ import (
 func main() {
 
 	e := echo.New()
-
+	build.Initialize()
+	build.NewClient()
+	build.GetUrlSetFromDB()
 	go build.RunServer(e)
 
 	for {
