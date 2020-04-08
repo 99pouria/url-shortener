@@ -1,4 +1,4 @@
-package build
+package url_shortener
 
 import (
 	"fmt"

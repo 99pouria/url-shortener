@@ -1,14 +1,12 @@
 package main
 
 import (
-	"url-shortener/build"
+	"url-shortener/url-shortener"
 )
 
 func main() {
 
-	build.InitializeDataBase()
-	build.NewDateBaseClient()
-	build.UpdateUrlSet()
-	build.RunServer()
+	url_shortener.InitializeDataBase()
+	url_shortener.RunServer()
 
 }
