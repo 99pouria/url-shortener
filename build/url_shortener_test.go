@@ -21,12 +21,13 @@ func TestCreateShortAddress(t *testing.T) {
 	}
 }
 
-func TestOpenUrl(t *testing.T) {
-	err := OpenUrl("http://google.com/")
-	if err != nil {
-		t.Error(err)
-	}
-}
+//
+//func TestOpenUrl(t *testing.T) {
+//	err := OpenUrl("http://google.com/")
+//	if err != nil {
+//		t.Error(err)
+//	}
+//}
 
 func TestMapURLtoShorterURL(t *testing.T) {
 	go RunServer(e)
