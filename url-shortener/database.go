@@ -1,20 +1,25 @@
 package url_shortener
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/go-redis/redis"
+	"strconv"
 )
 
 var dataBase *redis.Client
 
-func InitializeDataBase() {
+func InitializeDataBase() error {
 	dataBase = redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
 		Password: "",
 		DB:       0,
 	})
-	UpdateUrlSet()
+
+	if getFromDB("seed") == "" {
+		return addToDB("seed", "0")
+	} else {
+		seed, _ = strconv.Atoi(getFromDB("seed"))
+		return nil
+	}
 }
 
 func getFromDB(key string) string {
@@ -26,28 +31,7 @@ func getFromDB(key string) string {
 	return val
 }
 
-func addToDB(key string, value string) {
+func addToDB(key string, value string) error {
 	err := dataBase.Set(key, value, 0).Err()
-	if err != nil {
-		fmt.Println(err)
-	}
-}
-
-func UpdateUrlSet() {
-	s := getFromDB("urlShortener")
-	if s == "" {
-		return
-	}
-	err := json.Unmarshal([]byte(s), &UrlSet)
-	if err != nil {
-		fmt.Println(err)
-	}
-	for range UrlSet {
-		seed++
-	}
-}
-
-func updateDB() {
-	dataBytes, _ := json.Marshal(UrlSet)
-	addToDB("urlShortener", string(dataBytes))
+	return err
 }

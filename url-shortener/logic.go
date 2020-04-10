@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-var seed int64
+var seed int
 var UrlSet = make(map[string]string)
 
 func OpenUrl(url string) error {
@@ -17,18 +17,21 @@ func OpenUrl(url string) error {
 
 func CreateShortAddress() string {
 	seed++
-	s := strconv.FormatInt(seed, 32)
-	return fmt.Sprint(s)
+	addToDB("seed", fmt.Sprint(seed))
+	return strconv.FormatInt(int64(seed), 32)
 }
 
 func MapURLtoShorterURL(longUrl string) string {
 	if !strings.Contains(longUrl, "http") {
-		longUrl = fmt.Sprint("https://", longUrl)
+		longUrl = "https://" + longUrl
 	}
 
-	shortString := CreateShortAddress()
-	UrlSet[shortString] = longUrl
-	updateDB()
+	shortUrl := "http://localhost:8080/open/" + CreateShortAddress()
+	err := addToDB(shortUrl, longUrl)
 
-	return fmt.Sprint("http://localhost:8080/open/", shortString)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return shortUrl
 }
