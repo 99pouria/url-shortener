@@ -1,10 +1,11 @@
-package url_shortener
+package server_handler
 
 import (
 	"fmt"
 	"github.com/labstack/echo"
 	"net/http"
-	"strings"
+	"url-shortener/database"
+	"url-shortener/generator"
 )
 
 func RunServer() {
@@ -12,14 +13,17 @@ func RunServer() {
 	e := echo.New()
 
 	e.GET("/open/:key", open)
-	e.GET("/create/:url", createShortURL)
+	e.POST("/create", create)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
 
 func open(c echo.Context) error {
-	longURL := getFromDB("http://localhost:8080/open/" + c.Param("key"))
-	err := OpenUrl(longURL)
+	longURL, err := database.GetFromDB("http://localhost:8080/open/" + c.Param("key"))
+	if err != nil {
+		fmt.Println(err)
+	}
+	err = generator.OpenUrl(longURL)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -27,9 +31,9 @@ func open(c echo.Context) error {
 	return err
 }
 
-func createShortURL(c echo.Context) error {
-	req := strings.Split(c.Request().RequestURI, "/create/")
-	res, err := MapURLtoShorterURL(req[1])
+func create(c echo.Context) error {
+	longURL := c.FormValue("longURL")
+	res, err := generator.MapURLtoShorterURL(longURL)
 	if err != nil {
 		c.String(http.StatusOK, err.Error())
 	} else {

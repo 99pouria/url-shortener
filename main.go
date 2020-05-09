@@ -1,17 +1,14 @@
 package main
 
 import (
-	"fmt"
-	url_shortener "url-shortener/url-shortener"
+	"url-shortener/database"
+	"url-shortener/server-handler"
 )
 
 func init() {
-	err := url_shortener.InitializeDataBase()
-	if err != nil {
-		fmt.Println(err)
-	}
-	url_shortener.RunServer()
+	database.InitializeDataBase()
 }
 
 func main() {
+	server_handler.RunServer()
 }
