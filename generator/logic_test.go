@@ -1,8 +1,8 @@
 package generator
 
 import (
+	"github.com/pooria1/url-shortener/database"
 	"testing"
-	"url-shortener/database"
 )
 
 func TestCreateShortAddress(t *testing.T) {

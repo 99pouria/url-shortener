@@ -2,10 +2,10 @@ package generator
 
 import (
 	"github.com/go-redis/redis"
+	"github.com/pooria1/url-shortener/database"
 	"math/rand"
 	"net/url"
 	"os/exec"
-	"url-shortener/database"
 )
 
 // letterRunes is list of characters that we use in short URL. It contains numbers, uppercase and lowercase letters

@@ -3,9 +3,9 @@ package server_handler
 import (
 	"fmt"
 	"github.com/labstack/echo"
+	"github.com/pooria1/url-shortener/database"
+	"github.com/pooria1/url-shortener/generator"
 	"net/http"
-	"url-shortener/database"
-	"url-shortener/generator"
 )
 
 func RunServer() {
