@@ -23,21 +23,14 @@ func open(c echo.Context) error {
 	if err != nil {
 		fmt.Println(err)
 	}
-	err = generator.OpenUrl(longURL)
-	if err != nil {
-		fmt.Println(err)
-	}
-	err = c.String(http.StatusOK, longURL)
-	return err
+	return c.Redirect(http.StatusMovedPermanently, longURL)
 }
 
 func create(c echo.Context) error {
 	longURL := c.FormValue("longURL")
 	res, err := generator.MapURLtoShorterURL(longURL)
 	if err != nil {
-		c.String(http.StatusOK, err.Error())
-	} else {
-		c.String(http.StatusOK, res)
+		c.String(http.StatusBadRequest, err.Error())
 	}
-	return err
+	return c.String(http.StatusOK, res)
 }

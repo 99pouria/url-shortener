@@ -5,16 +5,10 @@ import (
 	"github.com/pooria1/url-shortener/database"
 	"math/rand"
 	"net/url"
-	"os/exec"
 )
 
 // letterRunes is list of characters that we use in short URL. It contains numbers, uppercase and lowercase letters
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")
-
-func OpenUrl(url string) error {
-	err := exec.Command("xdg-open", url).Run()
-	return err
-}
 
 func CreateShortAddress() string {
 	randString := make([]rune, 5)

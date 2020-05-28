@@ -6,7 +6,7 @@ import (
 
 var DataBase *redis.Client
 
-func InitializeDataBase() {
+func init() {
 	DataBase = redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
 		Password: "",
