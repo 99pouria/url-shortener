@@ -1,0 +1,10 @@
+{
+    "server_config": {
+        "hostname": "localhost",
+        "port": 8080
+    },
+    "database_config": {
+        "address": "localhost:6380",
+        "password": ""
+    }
+}
