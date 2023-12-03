@@ -5,7 +5,7 @@ go 1.21.4
 require (
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/labstack/echo v3.3.10+incompatible
-	github.com/pooria1/url-shortener v0.0.0-20200528133522-33d8545c2903
+	golang.org/x/sys v0.13.0
 )
 
 require (
@@ -19,6 +19,5 @@ require (
 	github.com/valyala/fasttemplate v1.0.1 // indirect
 	golang.org/x/crypto v0.14.0 // indirect
 	golang.org/x/net v0.17.0 // indirect
-	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 )
