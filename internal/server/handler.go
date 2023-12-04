@@ -1,4 +1,4 @@
-package server_handler
+package server
 
 import (
 	"fmt"
@@ -12,6 +12,7 @@ import (
 	"github.com/labstack/echo"
 )
 
+// Server is instance of server
 type Server struct {
 	echoInstance *echo.Echo
 	db           database.DatabaseURL

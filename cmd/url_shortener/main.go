@@ -7,7 +7,7 @@ import (
 	"os/signal"
 
 	"github.com/99pouria/url-shortener/internal/config"
-	server_handler "github.com/99pouria/url-shortener/internal/server-handler"
+	"github.com/99pouria/url-shortener/internal/server"
 	"golang.org/x/sys/unix"
 )
 
@@ -30,7 +30,7 @@ func main() {
 	}
 
 	// creating new server instance
-	s, err := server_handler.NewServer()
+	s, err := server.NewServer()
 	if err != nil {
 		log.Fatal(err)
 	}
