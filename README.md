@@ -27,9 +27,9 @@ We welcome contributions and suggestions to improve the URL shortener. Please su
 
 This project is licensed under the MIT License.
 
-Citations:
-[1] https://pkg.go.dev/github.com/mxschmitt/golang-url-shortener
-[2] https://pkg.go.dev/github.com/thitiph0n/go-url-shortener
-[3] https://pkg.go.dev/github.com/pantrif/url-shortener
-[4] https://pkg.go.dev/github.com/mattkelly/url-shortener-go
+Citations:  
+[1] https://pkg.go.dev/github.com/mxschmitt/golang-url-shortener  
+[2] https://pkg.go.dev/github.com/thitiph0n/go-url-shortener  
+[3] https://pkg.go.dev/github.com/pantrif/url-shortener  
+[4] https://pkg.go.dev/github.com/mattkelly/url-shortener-go  
 [5] https://www.reddit.com/r/golang/comments/vahlui/code_review_url_shortener_w_the_clean_architecture/?rdt=45620
